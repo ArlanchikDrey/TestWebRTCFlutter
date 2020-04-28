@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'agora/utils/Strings.dart';
 import 'agora/utils/utils.dart';
 /*import 'package:mywebrtc/GetUserMediaSample.dart';
 import 'package:mywebrtc/src/basic_sample/basic_sample.dart';
@@ -46,21 +47,21 @@ class MyAppState extends State<MyApp>{
          body: Column(
            children: <Widget>[
           I18nText(
-            'first_page.invalid_name', 
+            Strings.invalid_name, 
             child: Text(
               "",
               style: TextStyle(color: isColored ? Colors.red : Colors.blue),
           )),
           RaisedButton(
             child: I18nText(
-              'first_page.enter',
+              Strings.enter,
               child: Text(
               ""
             )),
             onPressed: () {
-            setState(() {
-              isColored=!isColored;
-            });
+              setState(() {
+                isColored=!isColored;
+              });
           })
           ]
          ) 
