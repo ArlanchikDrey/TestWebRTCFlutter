@@ -1,14 +1,79 @@
 import 'package:flutter/material.dart';
-import 'package:mywebrtc/GetUserMediaSample.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'agora/utils/utils.dart';
+/*import 'package:mywebrtc/GetUserMediaSample.dart';
 import 'package:mywebrtc/src/basic_sample/basic_sample.dart';
 import 'package:mywebrtc/src/call_sample/call_sample.dart';
 import 'package:mywebrtc/src/call_sample/data_channel_sample.dart';
 import 'package:mywebrtc/src/route_item.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shared_preferences/shared_preferences.dart';*/
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatefulWidget{
+  @override
+  State<StatefulWidget> createState() => MyAppState(false);
+}
+
+class MyAppState extends State<MyApp>{
+  bool isColored;
+
+  MyAppState(this.isColored);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: mDefaultTheme,
+      localizationsDelegates: <LocalizationsDelegate>[
+		    FlutterI18nDelegate(translationLoader: FileTranslationLoader(
+          fallbackFile: "ru",
+          basePath: "assets/locales",
+        )),
+		    GlobalMaterialLocalizations.delegate,
+		    GlobalWidgetsLocalizations.delegate,
+		    GlobalCupertinoLocalizations.delegate
+	    ],
+	    supportedLocales: <Locale>[
+	    	const Locale("en", "US"),
+	    	const Locale("ru", "RU")
+	    ],
+      home: Scaffold(
+         appBar: AppBar(
+            title: Text('example'),
+          ),
+         body: Column(
+           children: <Widget>[
+          I18nText(
+            'first_page.invalid_name', 
+            child: Text(
+              "",
+              style: TextStyle(color: isColored ? Colors.red : Colors.blue),
+          )),
+          RaisedButton(
+            child: I18nText(
+              'first_page.enter',
+              child: Text(
+              ""
+            )),
+            onPressed: () {
+            setState(() {
+              isColored=!isColored;
+            });
+          })
+          ]
+         ) 
+      ),
+    );
+  }
+}
+
+final ThemeData mDefaultTheme = ThemeData(
+  primaryColor: string2Color('#0a0a0a'),
+);
+
+/*class MyApp extends StatefulWidget {
   @override
   _MyAppState createState() => new _MyAppState();
 }
@@ -143,4 +208,4 @@ class _MyAppState extends State<MyApp> {
           }),
     ];
   }
-}
+}*/
